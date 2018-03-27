@@ -3,21 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <title>Test</title>
-        <link rel="stylesheet" href="style.css">
+       <!-- <link rel="stylesheet" href="style.css"> -->
     </head>
     <body>
         <div id="main">
             <form id="form" onsubmit="return false;">
-                <label>Enter a string to encrypt and key to encrypt with</label>
+                <label>Enter a string to encrypt</label>
                 <br>
-                <input type="text" id="myPlaintext" placeholder="Plaintext"/>
-                <input type="text" id="myKey" placeholder="Key"/>
-                <input type="submit" onclick="encryptThis();"/>
-                <input type="submit" onclick="AlertTest()"/>
-                <div id="encryptedText"></div>
-                <br>
-                <input type="submit" onclick="encryptAll()" value="Encrypt against all keys"/>
+                <input type="text" id="mPlaintext" placeholder="Plaintext"/>   
             </form>
+            <form>
+                <label>Enter a a key to encrypt the string by</label>
+                <br>
+                <input type="text" id="mKey" placeholder="Key"/>
+            </form>
+            <button onclick="encryptThis()"> Encrypt your message</button>
+            <div id="encryptedText"></div>
+            <button onclick="AlertTest()">Alert Test</button>
+            <button onclick="encryptAll()">Encrypt All</button>
             <table id="table1" border="1"></table>
         </div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
