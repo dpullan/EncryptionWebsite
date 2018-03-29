@@ -6,6 +6,14 @@ function getPlainKey() {
     myPlaintext = document.getElementById('mPlaintext').value;
     myKey = document.getElementById('mKey').value;
 }
+function showE() {
+    let x = document.getElementById("encryptedText");
+    x.style.display = "block";
+}
+function showD() {
+    let x = document.getElementById("decryptedText");
+    x.style.display = "block";
+}
 function encrypt(plaintext, key) {
     let encrypted = CryptoJS.AES.encrypt(plaintext, key);
     return encrypted;
@@ -17,7 +25,22 @@ function decrypt(encrypted, key) {
 function encryptThis() {
     getPlainKey();
     let encrypted = encrypt(myPlaintext, myKey);
-    document.getElementById("encryptedText").innerHTML = encrypted;
+    document.getElementById("encryptedText").innerHTML = "<h3>Encrypted Text: </h3>" + encrypted;
+    showE();
+}
+function decryptThis() {
+    getPlainKey();
+    let encrypted = encrypt(myPlaintext, myKey);
+    let decrypted = decrypt(encrypted, myKey);
+    document.getElementById("decryptedText").innerHTML = "<h3>Decrypted Text: </h3>" + decrypted;
+    showD();
+}
+function edThis() {
+    getPlainKey();
+    encryptThis();
+    decryptThis();
+    showE();
+    showD();
 }
 function encryptAll() {
     getPlainKey();
@@ -43,5 +66,3 @@ function processData(myData) {
     }
     document.getElementById("table1").innerHTML = string;
 }
-
-  
