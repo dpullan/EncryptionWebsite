@@ -1,9 +1,6 @@
 var myPlaintext = "";
 var myKey = "";
-let keys = [];
 let string = "";
-let string2 = "";
-let string3 = "";
 function getPlainKey() {
     myPlaintext = document.getElementById('mPlaintext').value;
     myKey = document.getElementById('mKey').value;
@@ -44,37 +41,23 @@ function edThis() {
     showE();
     showD();
 }
-function encryptAll() {
-    getPlainKey();
-    $.getJSON("https://sheets.googleapis.com/v4/spreadsheets/1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY/values/Sheet?key=AIzaSyCN3WBTjxygD-D8gYhJ6rOW9dAnSWYu0fI", processData);
-} //AIzaSyCN3WBTjxygD-D8gYhJ6rOW9dAnSWYu0fI
-//1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY
-function encryptAllWords() {
-  getPlainKey();
-  $.getJSON("https://spreadsheets.google.com/feeds/list/1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY/3/public/full?alt=json", processWordData);
+function clearDiv(elementID) {
+  string = "";
+  document.getElementById(elementID).innerHTML = "";
 }
-function encryptAllPass() {
+function encryptAll() {
+  clearDiv("table1");
   getPlainKey();
-  $.getJSON("http://danycabrera.com/csc130/proxy.php?key=1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY&sheet=Sheet4", processPassData);
+  $.getJSON("http://danycabrera.com/csc130/proxy.php?key=1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY&sheet=Sheet1", processData);
+}
+function encryptAllKey() {
+  clearDiv("table1");
+  getPlainKey();
+  $.getJSON("http://danycabrera.com/csc130/proxy.php?key=1wqnh5q6cthLz1lyHTF6sqQhYB7rca6RUGJy57y2EOgY&sheet=Sheet1", processDataKey);
 }
 function AlertTest() {
     getPlainKey();
     alert(myPlaintext);
-}
-function processWordData(myData) {
-  getPlainKey();
-  string2 += "<tr><th>Key</th><th>Encrypted Message</th><th>Decrypted Message</th><th>Original Message</th></tr>";
-  for (i in myData) {
-    let encrypted = encrypt(myPlaintext, myData[i].word);
-    let decrypted = decrypt(encrypted, myData[i].word);
-    string2 += "<tr>";
-    string2 += "<td>" + myData[i].word + "</td>";
-    string2 += "<td>" + encrypted + "</td>";
-    string2 += "<td>" + decrypted + "</td>";
-    string2 += "<td>" + myPlaintext + "</td>";
-    string2 += "</tr>";
-  }
-  document.getElementById("table2").innerHTML = string2;
 }
 function processData(myData) {
     getPlainKey();
@@ -82,7 +65,6 @@ function processData(myData) {
     for (i in myData) {
         let encrypted = encrypt(myPlaintext, myData[i].key);
         let decrypted = decrypt(encrypted, myData[i].key);
-        keys[i] = myData[i].key;
         string += "<tr>";
         string += "<td>" + myData[i].key + "</td>";
         string += "<td>" + encrypted + "</td>";
@@ -91,4 +73,19 @@ function processData(myData) {
         string += "</tr>";
     }
     document.getElementById("table1").innerHTML = string;
+}
+function processDataKey(myData) {
+  getPlainKey();
+  string += "<tr><th>Key</th><th>Encrypted Message</th><th>Decrypted Message</th><th>Original Message</th></tr>";
+  for (i in myData) {
+      let encrypted = encrypt(myData[i].key, myKey);
+      let decrypted = decrypt(encrypted, myKey);
+      string += "<tr>";
+      string += "<td>" + myKey + "</td>";
+      string += "<td>" + encrypted + "</td>";
+      string += "<td>" + decrypted + "</td>";
+      string += "<td>" + myData[i].key + "</td>";
+      string += "</tr>";
+  }
+  document.getElementById("table1").innerHTML = string;
 }
