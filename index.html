@@ -16,7 +16,29 @@
     <script defer src="/__/firebase/4.12.1/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        .buttons {
+            background-color: grey;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .buttons:hover {
+            background: lightgrey;
+            color: black;
+            cursor: pointer;
+        }
+        #encryptedText {
+            display: none;
+        }
+        #decryptedText {
+            display: none;
+        }
+    </style>
   </head>
   <body>
       <div id="main">
@@ -43,7 +65,7 @@
                   <li><a href="http://www.passwordmeter.com/" target="_blank">http://www.passwordmeter.com/</a></li>
               </ul>
           </div>
-          <button onclick="TInfo()">Toggle Info</button>
+          <button onclick="TInfo()" class="buttons">Toggle Info</button>
           <form id="form" onsubmit="return false;">
               <label>Enter a string to encrypt</label>
               <br>
@@ -54,9 +76,10 @@
               <br>
               <input type="text" id="mKey" placeholder="Key"/>
           </form>
-          <button onclick="encryptThis()"> Encrypt your plaintext</button>
-          <button onclick="decryptThis()"> Decrypt your plaintext</button>
-          <button onclick="edThis()"> Encrypt and Decrypt your plaintext</button>
+          <button onclick="encryptThis()" class="buttons"> Encrypt your plaintext</button>
+          <button onclick="decryptThis()" class="buttons"> Decrypt your plaintext</button>
+          <button onclick="edThis()" class="buttons"> Encrypt and Decrypt your plaintext</button>
+          <button onclick="showSP()" class="buttons">Create a password</button>
           <div id="encryptedText">
               <h3>Encrypted Message: </h3>
           </div>
@@ -64,13 +87,11 @@
               <h3>Decrypted Message: </h3>
           </div>
           <!-- <button onclick="AlertTest()">Alert Test</button> -->
-          <button onclick="encryptAll()">Encrypt All</button>
-          <button onclick="encryptAllKey()">Encrypt against your key</button>
-          <button onclick="showSP()">Create a password</button>
+          <button onclick="encryptAll()" class="buttons">Encrypt All</button>
+          <button onclick="encryptAllKey()" class="buttons">Encrypt against your key</button>
           <div id="strongP"></div>
           <table id="table1" border="1"></table>
       </div>
-    <button onclick="getKeys()"></button>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
